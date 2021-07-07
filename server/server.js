@@ -6,7 +6,8 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.urlencoded());
 
-app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(__dirname, './build')));
+app.use(express.static(path.join(__dirname, './client')));
 
 app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../index.html'));
