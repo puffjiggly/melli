@@ -12,6 +12,4 @@ app.post('/', lyricController.getTracks, youtubeController.getLink, (req, res) =
   return res.status(200).send(res.locals);
 });
 
-
-
 module.exports = app;

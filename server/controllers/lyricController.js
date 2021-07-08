@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
-const apikey = MUSIXMATCH_API_KEY;
+require('dotenv').config();
+const apikey = process.env.MUSIXMATCH_API_KEY;
 const lyricController = {};
 
 // create middleware function that sends a request to musixmatch
@@ -9,17 +10,16 @@ const lyricController = {};
 // }
 
 lyricController.getTracks = (req, res, next) => {
+  console.log('Made it to the server and req body is ', req.body);
   const { q_lyrics } = req.body;
+  console.log('lyrics requested from client at ', q_lyrics);
   fetch(`http://api.musixmatch.com/ws/1.1/track.search?apikey=${apikey}&q_lyrics=${q_lyrics}&f_has_lyrics=true&s_track_rating=desc&page_size=5`)
     .then(data => data.json())
     .then(data => {
       // reduce the data.message.body.track_list array
-      // initial = res.locals.queryResult
-      // in each reduce iteration, we want to create a property on res.locals.queryResult 
-      // add a property to the res.locals object with the key of query Resul and initizlie to an empty array to allow for reduce
+      // in each reduce iteration, we want to add an object to the res.locals.queryResult array with the artist track and album data 
      res.locals.queryResult = data.message.body.track_list.reduce((acc, curr) => {
       // create an object with track name and artist name
-      // console log temp Curr in each loop
       const { track } = curr;
       const { track_name, artist_name, album_name } = track;
       // push track name and artist name to acc
@@ -30,6 +30,7 @@ lyricController.getTracks = (req, res, next) => {
       });
       return acc;
      }, []);
+     console.log('res.locals after extracting artist and track and album name', res.locals);
     })
     .then(() => {
       return next();
