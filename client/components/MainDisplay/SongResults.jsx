@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from 'SearchBar';
 
+
 // where do I place the SearchBar info?
 // (how do I get the files into the computer ?)
 // needs to come from handleClick results of SearchBar file --> data variable --> ALSO: in console listed as queryResult
@@ -8,8 +9,6 @@ import SearchBar from 'SearchBar';
 export const SongResults = () => {
   // initial state dyring 'tip of the tongue...'
   // will update to topFive --> initial state string is in brackets --> will update to array
-  const data = { queryResult: [] };
-  const [songs, updateSongs] = useState(data);
 
   useEffect(() => {
     // update the top five songs
