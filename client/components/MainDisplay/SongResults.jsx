@@ -8,11 +8,12 @@ import SearchBar from 'SearchBar';
 export const SongResults = () => {
   // initial state dyring 'tip of the tongue...'
   // will update to topFive --> initial state string is in brackets --> will update to array
-  const [songs, topFive] = useState(['Tip of the tongue, the teeth, and the lips...']);
+  const data = { queryResult: [] };
+  const [songs, updateSongs] = useState(data);
 
   useEffect(() => {
     // update the top five songs
-    for (let i = 0; i < topFive.length; i++) {
+    for (let i = 0; i < updateSongs.length; i++) {
 
     }
   });
@@ -25,7 +26,7 @@ export const SongResults = () => {
     //update the top 5 displayed
     // currently reads as add new song to end of song array
     // needs to creste a new array based on query
-    topFive([...songs, { name: 'What\'s Chuck\'s Age Again?', artist: 'blink-182', album: 'Enema of the State', id: '0' },])
+    updateSongs([...songs, { name: 'What\'s Chuck\'s Age Again?', artist: 'blink-182', album: 'Enema of the State', id: '0' },])
 
     // displays results of user query (top 5 songs)
     songs = songs.map((song) => (
@@ -52,6 +53,11 @@ export const SongResults = () => {
     </>
   )
 };
+
+
+
+
+
 
 {/**** remove before push */ }
 // brainstorm idea: similar to bracket color matcher, an extension that displays correlating tokens for html elements-- > maybe jsx or other languages w / long separation of code
