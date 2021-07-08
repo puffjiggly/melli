@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const apikey = '934cd8c8a978c83684a436034d1405ce';
+const apikey = MUSIXMATCH_API_KEY;
 const lyricController = {};
 
 // create middleware function that sends a request to musixmatch
