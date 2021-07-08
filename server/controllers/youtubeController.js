@@ -4,20 +4,27 @@
 // use search 
 
 const fetch = require('node-fetch');
-const key = YOUTUBE_API_KEY;
+require('dotenv').config();
+const key = process.env.YOUTUBE_API_KEY;
 
 const youtubeController = {};
 
-youtubeController.getLink = (req, res, next) => {
-  // iterate over res locals
-  res.locals.queryResult.forEach((curr) => {
+youtubeController.getLink = async (req, res, next) => {
+  // define an async function to fetch data from youtube api that will await for a response before saving data to res locals
+  async function youtubeFetch(track_name, artist_name) {
+    let response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${track_name} ${artist_name}&key=${key}`);
+    // convert to json and return
+    console.log('response received from youtube api');
+    return await response.json();
+  }
+
+  // iterate over res locals and create a youtube fetch request for the thumbnail and URL of each element
+  for (let i = 100; i < res.locals.queryResult.length; i++) {
+    const curr = res.locals.queryResult[i];
     console.log('current element in res locals query result is ', curr);
     // extract track_name and artist_name from res locals
-    const { track_name , artist_name } = curr;
-    // console.log(`${track_name artist_name}`);
-      // for each element, create a youtube fetch request for the thumbnail and URL
-    fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${track_name} ${artist_name}&key=${key}`)
-      .then(data => data.json())
+    const { track_name , artist_name, album_name } = curr;
+    await youtubeFetch(track_name, artist_name)
       .then(data => {
         // convert videoID into URL for the client
         const url = 'https://youtu.be/' + data.items[0].id.videoId;
@@ -28,14 +35,12 @@ youtubeController.getLink = (req, res, next) => {
         const thumbnailUrl = data.items[0].snippet.thumbnails.medium.url;
         console.log('thumbnail url is ', thumbnailUrl);
         curr.thumbnailUrl = thumbnailUrl;
+        console.log('curr inside the for loop is ', curr);
       })
-      .then(() => {
-        return next();
-      })
-      .catch((err) => {
-        return next(err);
-      })
-    })
+      .catch(err => next(err))
+    }
+    console.log('outside for loop, the data saved to res locals', res.locals);
+    return next();
 }
 
 

@@ -14,20 +14,22 @@ const lyricForm = useRef(null);
 //create click handler to catch each input in the search bar
 const handleClickEvent = () => {
 //create lyric input and reference document. get elment by id and reference search bar to pull info
-  const lyricsInput = document.getElementById('searchbar')
+const lyricsInput = document.getElementById('searchbar');
 //use fetch post request to send lyrics to the backend for API search
-  fetch('/lyrics', {
-//post request
-   method:'POST', 
-// cover headers for content type
-   headers: {
-     "Content-type": "application/x-www-form-urlencoded",
+fetch('/lyrics', {
+  method:'POST', // backend dev team requests post request so they can have access to the req body
+  mode: 'no-cors', 
+  // cover headers for content type
+  headers: {
+    // experiment
+    "Content-type": "application/x-www-form-urlencoded",
     },
-//put onto bocy after json strigfy under q_lyrics and value lyricsInput.value
-    body: JSON.stringify({q_lyrics: lyricsInput.value})
-  })
+  //put onto body after json strigfy under q_lyrics and value lyricsInput.value
+  body: JSON.stringify({q_lyrics: lyricsInput.value})
+})
 //console.log to see results, sending body to back end
-  .then(body => console.log(body))
+  .then(response => response.json())
+  .then(data => console.log('response from server is ', data));
 } 
 
 return(

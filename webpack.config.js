@@ -25,7 +25,7 @@ module.exports = {
     publicPath: '/build/',
     port: 8080,
     proxy: {
-      '/db': 'http://localhost:3000',
+      '/lyrics': 'http://localhost:3000'
     }
   }
 }
