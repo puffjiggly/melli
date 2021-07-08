@@ -9,7 +9,7 @@ const getData = (event) =>{
   console.log(event.target.value)
 //   req.body.q_lyrics = event.traget.value;
 }
-//create a var using useRef to reference the input feild
+//create a var using useRef to reference the input field
 const lyricForm = useRef(null);
 //create click handler to catch each input in the search bar
 const handleClickEvent = () => {
