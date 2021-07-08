@@ -4,7 +4,7 @@
 // use search 
 
 const fetch = require('node-fetch');
-const key = 'AIzaSyDURXvbPqbRg0GJjroiHUB9Pax2MymbyIA';
+const key = YOUTUBE_API_KEY;
 
 const youtubeController = {};
 
