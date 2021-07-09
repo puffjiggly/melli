@@ -1,9 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 //created react hooks but these seem to be pointless at this point
 const SearchBar = () => {
   const songState = [];
   let [songs, updateSongs] = useState(songState);
-
+  useEffect(() => {
+    //callback function here;
+    console.log('this is the new state: ', songs);
+    for (let i)
+  }, [songs]);
+  
   //create a var using useRef to reference the input field
   const lyricForm = useRef(null);
   //create click handler to catch each input in the search bar
@@ -26,6 +31,7 @@ const SearchBar = () => {
       .then(response => response.json())
       .then(data => {
         console.log('response from server is ', data.queryResult);
+        // wrap this function in use effect
         updateSongs([...data.queryResult]);
         console.log('updated state is ', songs);
       })
@@ -39,6 +45,8 @@ const SearchBar = () => {
             <input id='searchbar' type='text' label={'lyrics'} lyrics={'lyrics'} placeholder='Enter song lyrics here!' /> 
           </form> 
           <button onClick={handleClickEvent}>Locate Song</button>
+          <div>{[songs]}
+            </div>
       </div> 
     )
 };

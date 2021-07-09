@@ -3,6 +3,7 @@ import mtvAPI from 'KC and the backend band';
 
 export const musicVideo = () => {
   <>
+  
     // url
     // thumbnail
 
@@ -12,6 +13,7 @@ export const musicVideo = () => {
     play audio track? from spotify api?
     // if not, list lyrics
     list lyrics
+
   </>
 
 }
