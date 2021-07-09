@@ -37,7 +37,7 @@ return(
     <form ref={lyricForm}>
       <input id='searchbar' type='text' label={'lyrics'} lyrics={'lyrics'} placeholder='Enter song lyrics here!'/>
     </form>
-    <button onClick={handleClickEvent}>Locate Song</button>
+    <button id='locatesong' onClick={handleClickEvent}>Locate Song</button>
   </div>
  )
 }
