@@ -9,7 +9,8 @@ app.use(express.json({type: 'application/x-www-form-urlencoded'}));
 
 // app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(__dirname, './build')));
+app.use(express.static(path.join(__dirname, './client')));
 
 app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../index.html'));

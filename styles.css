@@ -1,0 +1,20 @@
+#title {
+    position: absolute;
+    top: 5%;
+    left: 23%;
+}
+
+#searchbar {
+    position: fixed;
+    top: 20%;
+    left: 33%; 
+    width: 450px;
+}
+
+#locatesong{
+  position:absolute;
+  top: 25%;
+  left: 45%;
+  
+}
+

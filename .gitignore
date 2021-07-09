@@ -2,4 +2,5 @@
 package-lock.json
 node_modules
 .env
-build
+build/bundle.js
+build/bundle.js.LICENSE.txt
